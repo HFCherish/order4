@@ -8,9 +8,11 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
 import static com.thoughtworks.ketsu.support.TestHelper.productJsonForTest;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,5 +30,15 @@ public class ProductRepositoryTest {
 
         assertThat(fetched.isPresent(), is(true));
         assertThat(fetched.get().getId(), is(product.getId()));
+    }
+
+    @Test
+    public void should_get_all_products() {
+        Product product = prepareProduct(productRepository);
+
+        List<Product> fetched = productRepository.findAll();
+
+        assertThat(fetched.size(), is(1));
+
     }
 }

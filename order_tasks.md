@@ -15,12 +15,12 @@
 6. get all products
 	1. should return 200 when get products (resource.get) --10 :: 4
 	2. should the response body contains at least  one item info (resource.get, record) --10 :: 2
-	3. should that item contains name, description, price info (resource.get, record) --10 :: 5
+	3. should that item contains name, description, price, uri info (resource.get, record) --10 :: 5
 	3. --------------------------------------------------
-	2. should have tried to search from database and should able to get a least one product if database is not empty (repo.findAll) --5
+	2. should have tried to search from database and should able to get a least one product if database is not empty (repo.findAll) --5 :: 3
 	3. should that one product's id are the same as expected (mapper-findAll) --10
 	3. --------------------------------------------------
-	2. should the response body contains uri info (resource.get, record) --5
+	2. should the response body contains right uri, name, description, price info (resource.get, record) --5
 	4. should return empty when no products in db --5
 11. user register
 	11. should return 201 when register a new user (resource.post) --10 ::
@@ -43,11 +43,11 @@
 	5. should return 400 when the order item doesn't exists --5 ::
 27. get some order of some user
 	28. should return 200 when review some order of some user (resource.get) --15 ::
-	29. should the response body contain uri info (resource.get) --15 ::
- 	20. should the response body contain name, address, phone, total\_price, created\_at info (resource.get, record) --20 ::
+	29. should the response body contain right uri info (resource.get) --15 ::
+ 	20. should the response body contain right name, address, phone, total\_price, created\_at info (resource.get, record) --20 ::
  	21. should the response body contain at least one order_item info (resource.get, record) --15 ::
- 	22. should the order\_item contain product_id, quantity, amount info (resource.get, record) --10 ::
-	4. should return 404 when no order in db --5 :: 5
+ 	22. should the order\_item contain right product_id, quantity, amount info (resource.get, record) --10 ::
+	4. should return 404 when no order in db --5 ::
 27. get all orders of some user
 	28. should return 200 when review all orders of some user (resource.get) --5 ::
 	29. should the response body contain at least one order info. (resource.get, record)  --10 ::
@@ -58,7 +58,7 @@
 	29. should have tried to fetch all orders from database and should get one order when there's one order in database (repo.findAll) --2 :: 
 	31. should the order's id is the same as the created one (resourc.post, repo.save, mapper, database, record; repo.findAll, mapper) --13
 	3. --------------------------------------------------
-	4. should the response body contain created\_at info when get all orders successfully -- 2 ::
+	4. should the response body contain right created\_at, uri, name, address, phone, total\_price info when get all orders successfully -- 2 ::
 	4. should return empty when no orders in db --5 ::
 29. create payment
 	30. should return 201 when pay (resource.post) --15 ::
@@ -67,10 +67,10 @@
 	32. should the id of that payment is as expected (resourc.post, repo.save, mapper, database, record; repo.findByOrderId, mapper) --20 ::
 34. get payment of some order
 	32. should return 200 when get payment (resourc.get) --10 ::
-	33. should the response body include pay type info -- 12 :: 11
-	35. should the response body include amount, order_uri & payment uri (resource.get) --15 ::
-	34. should the response body include creating date (resoure.get, mapper-findByOrderId, record) --5 :: 4
-	4. should return 404 when no payment in db --5 :: 2
+	33. should the response body include right pay type info -- 12 ::
+	35. should the response body include right amount, order_uri & payment uri (resource.get) --15 ::
+	34. should the response body include right creating date (resoure.get, mapper-findByOrderId, record) --5 ::
+	4. should return 404 when no payment in db --5 ::
 
 #databases
 1. product: 
