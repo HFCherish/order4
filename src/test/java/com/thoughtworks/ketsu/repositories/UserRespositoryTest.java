@@ -26,8 +26,9 @@ public class UserRespositoryTest {
         Map userInfo = userJsonForTest(USER_NAME);
 
         User user = userRepository.save(userInfo);
-        Optional<User> fetched = userRepository.findById(7987l);
+        Optional<User> fetched = userRepository.findById(Long.valueOf(userInfo.get("id").toString()));
 
         assertThat(fetched.isPresent(), is(true));
+        assertThat(fetched.get().getId(), is(user.getId()));
     }
 }
