@@ -110,4 +110,13 @@ public class ProductApiTest extends ApiSupport {
         assertThat(prod.get("price"), is(product.getPrice()));
         assertThat(prod.get("uri"), is(productBaserUrl + "/" + product.getId()));
     }
+
+    @Test
+    public void should_return_empty_when_get_all_products_given_empty_db() {
+        Response response = get(productBaserUrl);
+
+        assertThat(response.getStatus(), is(200));
+        List prods = response.readEntity(List.class);
+        assertThat(prods.size(), is(0));
+    }
 }
