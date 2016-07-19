@@ -32,6 +32,9 @@ public class User extends AssertionConcern implements Record {
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return new HashMap<String, Object>() {{
+            put("name", getName());
+            put("id", getId());
+            put("uri", routes.userUrl(User.this));
         }};
     }
 
