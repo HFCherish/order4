@@ -1,5 +1,8 @@
 package com.thoughtworks.ketsu.support;
 
+import com.thoughtworks.ketsu.domain.Product;
+import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,5 +19,7 @@ public class TestHelper {
         }};
     }
 
-//    public static Product product
+    public static Product prepareProduct(ProductRepository productRepository) {
+        return productRepository.save(productJsonForTest());
+    }
 }

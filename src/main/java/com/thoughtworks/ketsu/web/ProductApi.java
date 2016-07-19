@@ -1,8 +1,8 @@
 package com.thoughtworks.ketsu.web;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import com.thoughtworks.ketsu.domain.Product;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,5 +14,12 @@ public class ProductApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(@Context UriInfo uriInfo) {
         return Response.created(uriInfo.getRequestUri()).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product getOne(@PathParam("id") Long id) {
+        return new Product("hhk", "hkj",798);
     }
 }
