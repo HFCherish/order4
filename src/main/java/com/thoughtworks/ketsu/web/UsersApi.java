@@ -6,12 +6,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.Map;
 
 @Path("users")
 public class UsersApi {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser() {
+    public Response createUser(Map<String, Object> userInfo) {
+        if( userInfo.get("name")==null || !userInfo.get("name").toString().matches("^[A-Za-z\\d]+$")) {
+            throw new IllegalArgumentException("must contains name, which composed of letters and numbsers.");
+        }
         return Response.created(URI.create("")).build();
     }
 
