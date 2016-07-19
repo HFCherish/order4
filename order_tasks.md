@@ -6,13 +6,14 @@
 	4. --------------------------------------------------
 	3. should have tried to save the creation data into database and should able to get that product after creation. (repo.save, repo.findById) --10 :: 9
 	4. should that one product's id is the same as the created one (resourc.post, repo.save, mapper, database, records; repo.findById, mapper) --15 :: 11
+	4. should the creation uri contains product id in header location -- 5 :: 5
 6. get some product
 	6. should return 200 when get some product (resource.get) --10 :: 7
 	7. should the response body contains uri, id, name, description, price info (resource.get) --15 :: 8
 	3. --------------------------------------------------
 	4. should return 404 when no products in db --5 :: 2
 6. get all products
-	1. should return 200 when get products (resource.get) --10
+	1. should return 200 when get products (resource.get) --10 :: 4
 	2. should the response body contains at least  one item info (resource.get, record) --10
 	3. should that item contains name, description, price info (resource.get, record) --10
 	3. --------------------------------------------------
@@ -28,6 +29,8 @@
 	3. --------------------------------------------------
 	14. should have tried to save the user info into database and should able to get a user after registered (repo.findById) --10 ::
 	16. should the user's id is the same as the saved one. (resourc.post, repo.save, mapper, database, record; repo.findById, mapper) --15 ::
+	3. -------------------------------------------------
+	4. should the creation uri contains user id in header location -- 5 ::
 18. order creation
 	18. should return 201 when creating an order (resource.post) --15 ::
 	19. should include the creation uri in header location (resource.post) --2 ::
@@ -35,6 +38,7 @@
 	20. should have tried to save the order info into database and should able to get the order after created order (repo.findById) --15 ::
 	22. should the order's id is the same as the created one (resourc.post, repo.save, mapper, database, record; repo.findById, mapper) --13 ::
 	3. --------------------------------------------------
+	4. should the creation uri contains order id in header location -- 5 ::
 	4. should return 400 when the order contains 0 order item --10 ::
 	5. should return 400 when the order item doesn't exists --5 ::
 27. get some order of some user
