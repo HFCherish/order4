@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
@@ -100,6 +101,7 @@ public class ProductApiTest extends ApiSupport {
         Response response = get(productBaserUrl);
 
         assertThat(response.getStatus(), is(200));
-
+        List prods = response.readEntity(List.class);
+        assertThat(prods.size(), is(1));
     }
 }

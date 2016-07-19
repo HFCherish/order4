@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class ProductApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getAll() {
-        return new ArrayList<>();
+        return Arrays.asList(new Product("hgjk","gkhj",7689));
     }
 
 }

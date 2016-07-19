@@ -14,7 +14,7 @@
 	4. should return 404 when no products in db --5 :: 2
 6. get all products
 	1. should return 200 when get products (resource.get) --10 :: 4
-	2. should the response body contains at least  one item info (resource.get, record) --10
+	2. should the response body contains at least  one item info (resource.get, record) --10 :: 2
 	3. should that item contains name, description, price info (resource.get, record) --10
 	3. --------------------------------------------------
 	2. should have tried to search from database and should able to get a least one product if database is not empty (repo.findAll) --5
