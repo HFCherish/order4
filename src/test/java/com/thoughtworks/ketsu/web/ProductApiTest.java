@@ -4,6 +4,7 @@ import com.thoughtworks.ketsu.domain.Product;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,10 +41,11 @@ public class ProductApiTest extends ApiSupport {
 
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(productBaserUrl));
+        assertThat(response.getLocation().toString().matches(".*/\\d+$"), is(true));
     }
 
     @Test
-    public void should_400_when_create_product_given_imcomplete_param() {
+    public void should_400_when_create_product_given_incomplete_param() {
         Response response = post(productBaserUrl, new HashMap<String, Object>() {{
             put("name", PRODUCT_NAME);
             put("description", PRODUCT_DESC);

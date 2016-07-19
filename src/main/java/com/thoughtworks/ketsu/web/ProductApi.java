@@ -3,6 +3,7 @@ package com.thoughtworks.ketsu.web;
 import com.thoughtworks.ketsu.domain.Product;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 import com.thoughtworks.ketsu.infrastructure.validators.ProductValidator;
+import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -19,10 +20,10 @@ public class ProductApi {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Map<String, Object> prodInfo,
-                           @Context UriInfo uriInfo) {
+                           @Context UriInfo uriInfo,
+                           @Context Routes routes) {
         new ProductValidator().validate(prodInfo);
-        productRepository.save(prodInfo);
-        return Response.created(uriInfo.getRequestUri()).build();
+        return Response.created(routes.productUrl(productRepository.save(prodInfo))).build();
     }
 
     @GET
