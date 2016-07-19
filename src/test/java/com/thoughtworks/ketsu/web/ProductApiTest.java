@@ -56,4 +56,14 @@ public class ProductApiTest extends ApiSupport {
         assertThat(fetchedInfo.get("description").toString(), is(product.getDescription()));
         assertThat((double)fetchedInfo.get("price"), is(product.getPrice()));
     }
+
+    @Test
+    public void should_404_when_get_one_product_given_invalid_id() {
+        String getOneUrl = productBaserUrl + "/" + 0;
+
+        Response response = get(getOneUrl);
+
+        assertThat(response.getStatus(), is(404));
+
+    }
 }
