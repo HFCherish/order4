@@ -28,6 +28,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> findAll() {
-        return Arrays.asList(new Product("hk","khj",89));
+        return productMapper.findAll();
     }
 }

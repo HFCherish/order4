@@ -39,7 +39,7 @@ public class ProductApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getAll() {
-        return Arrays.asList(new Product("hgjk","gkhj",7689));
+        return productRepository.findAll();
     }
 
 }

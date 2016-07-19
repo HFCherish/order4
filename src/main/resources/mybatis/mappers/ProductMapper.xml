@@ -11,10 +11,10 @@
         FROM products
         WHERE id = #{id}
     </select>
-    <!--<select id="findByUserName" resultMap="records.user">-->
-        <!--SELECT-->
-        <!--<include refid="columns.user"/>-->
-        <!--FROM users U-->
-        <!--WHERE U.name = #{userName}-->
-    <!--</select>-->
+
+    <select id="findAll" resultMap="records.product">
+        SELECT *
+        FROM products
+    </select>
+
 </mapper>
