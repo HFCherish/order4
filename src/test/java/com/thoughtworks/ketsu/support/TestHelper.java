@@ -1,6 +1,8 @@
 package com.thoughtworks.ketsu.support;
 
 import com.thoughtworks.ketsu.domain.Product;
+import com.thoughtworks.ketsu.domain.user.User;
+import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 
 import java.util.HashMap;
@@ -16,6 +18,10 @@ public class TestHelper {
         return new HashMap<String, Object>() {{
             put("name", name);
         }};
+    }
+
+    public static User prepareUser(UserRepository userRepository) {
+        return userRepository.save(userJsonForTest(USER_NAME));
     }
 
     public static Map<String, Object> productJsonForTest() {
