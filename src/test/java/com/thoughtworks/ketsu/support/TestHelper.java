@@ -15,4 +15,6 @@ public class TestHelper {
             put("price", 1.1);
         }};
     }
+
+//    public static Product product
 }

@@ -1,7 +1,7 @@
 #tasks
 2. product creation
 	2. should return 201 when create a product  (resource.post)  --10 :: 8
-	3. should contain creation uri in header location (resource.post) --10 ::
+	3. should contain creation uri in header location (resource.post) --10 :: 3
 	4. --------------------------------------------------
 	3. should have tried to save the creation data into database and should able to get that product after creation. (repo.save, repo.findById) --10 ::
 	4. should that one product's id is the same as the created one (resourc.post, repo.save, mapper, database, records; repo.findById, mapper) --15 ::
