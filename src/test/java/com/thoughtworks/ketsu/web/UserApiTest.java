@@ -52,6 +52,16 @@ public class UserApiTest extends ApiSupport {
         assertThat(Long.valueOf(userInfo.get("id").toString()), is(user.getId()));
         assertThat(userInfo.get("name"), is(user.getName()));
         assertThat(userInfo.get("uri"), is(getUserUrl));
+    }
+
+    @Test
+    public void should_404_when_get_user_given_user_not_exist() {
+        User user = prepareUser(userRepository);
+        String getUserUrl = usersBaseUrl + "/90" + user.getId();
+
+        Response response = get(getUserUrl);
+
+        assertThat(response.getStatus(), is(404));
 
     }
 }
