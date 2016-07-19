@@ -18,6 +18,7 @@ import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -97,11 +98,18 @@ public class ProductApiTest extends ApiSupport {
 
     @Test
     public void should_get_all_products_successfully() {
-
+        Product product = prepareProduct(productRepository);
         Response response = get(productBaserUrl);
 
         assertThat(response.getStatus(), is(200));
         List prods = response.readEntity(List.class);
         assertThat(prods.size(), is(1));
+        Map prod = (Map)prods.get(0);
+//        assertThat(prod.get("name"), is(product.getName()));
+//        assertThat(prod.get("description"), is(product.getDescription()));
+//        assertThat(prod.get("price"), is(product.getP
+        assertThat(prod.get("name"), is(notNullValue()));
+        assertThat(prod.get("description"), is(notNullValue()));
+        assertThat(prod.get("price"), is(notNullValue()));
     }
 }
