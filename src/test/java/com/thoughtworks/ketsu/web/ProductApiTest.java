@@ -11,10 +11,10 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
-import static com.thoughtworks.ketsu.support.TestHelper.productJsonForTest;
+import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -43,6 +43,31 @@ public class ProductApiTest extends ApiSupport {
     }
 
     @Test
+    public void should_400_when_create_product_given_imcomplete_param() {
+        Response response = post(productBaserUrl, new HashMap<String, Object>() {{
+            put("name", PRODUCT_NAME);
+            put("description", PRODUCT_DESC);
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        response = post(productBaserUrl, new HashMap<String, Object>() {{
+            put("name", PRODUCT_NAME);
+            put("price", 1.1);
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        response = post(productBaserUrl, new HashMap<String, Object>() {{
+            put("description", PRODUCT_DESC);
+            put("price", 1.1);
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+    }
+
+    @Test
     public void should_get_ond_product_successfully() {
         Product product = prepareProduct(productRepository);
         String getOneUrl = productBaserUrl + "/" + product.getId();
@@ -65,6 +90,5 @@ public class ProductApiTest extends ApiSupport {
         Response response = get(getOneUrl);
 
         assertThat(response.getStatus(), is(404));
-
     }
 }
