@@ -67,7 +67,7 @@
 29. create payment
 	30. should return 201 when pay (resource.post) --15 :: 8
 	3. --------------------------------------------------
-	31. should try to save the payment info into database and should able to get that payment after pay (resourc.post, repo.findByOrderId) --20 :: 12  
+	31. should try to save the payment info into database and should able to get that payment after pay (resourc.post, repo.findByOrderId) --20 :: 5
 	32. should the id of that payment is as expected (resourc.post, repo.save, mapper, database, record; repo.findByOrderId, mapper) --20 ::
 34. get payment of some order
 	32. should return 200 when get payment (resourc.get) --10 ::

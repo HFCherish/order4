@@ -4,10 +4,7 @@ import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Order implements Record {
     private long id;
@@ -82,5 +79,13 @@ public class Order implements Record {
 
     public DateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public Payment pay() {
+        return null;
+    }
+
+    public Optional<Payment> getPayment() {
+        return Optional.ofNullable(new Payment());
     }
 }
