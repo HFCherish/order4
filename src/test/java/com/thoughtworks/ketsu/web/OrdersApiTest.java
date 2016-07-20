@@ -187,4 +187,13 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(orders.size(), is(1));
         verifyOrderBasicInfo(order, (Map)orders.get(0));
     }
+
+    @Test
+    public void should_return_empty_when_get_all_orders_given_db_empty() {
+        Response response = get(ordersBaseUrl);
+
+        assertThat(response.getStatus(), is(200));
+        List orders = response.readEntity(List.class);
+        assertThat(orders.size(), is(0));
+    }
 }

@@ -39,6 +39,6 @@ public class OrdersApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> getAll() {
-        return user.findAll();
+        return  user.findAll();
     }
 }
