@@ -29,7 +29,7 @@ public class TestHelper {
 
     public static Map<String, Object> paymentJsonForTest() {
         return new HashMap<String, Object>() {{
-            put("type", "CASH");
+            put("pay_type", "CREDIT_CARD");
             put("amount", 13546);
         }};
     }

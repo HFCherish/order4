@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.Map;
+
 import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -56,6 +58,8 @@ public class PaymentApiTest extends ApiSupport {
         Response response = get(paymentBaseUrl);
 
         assertThat(response.getStatus(), is(200));
+        Map paymentInfo = response.readEntity(Map.class);
+        assertThat(paymentInfo.get("pay_type"), is(payment.getType().name()));
 
     }
 }

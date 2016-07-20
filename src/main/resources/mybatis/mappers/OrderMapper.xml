@@ -37,8 +37,8 @@
     </select>
 
     <insert id="pay">
-        INSERT INTO payments (order_id, amount)
-        VALUES (#{orderId}, #{info.amount})
+        INSERT INTO payments (order_id, amount, type)
+        VALUES (#{orderId}, #{info.amount}, #{info.pay_type})
     </insert>
 
 
