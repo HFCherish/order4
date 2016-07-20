@@ -7,6 +7,7 @@ import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,10 +15,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -25,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @RunWith(ApiTestRunner.class)
-public class OrderApiTest extends ApiSupport {
+public class OrdersApiTest extends ApiSupport {
     @Inject
     UserRepository userRepository;
 
@@ -150,5 +148,10 @@ public class OrderApiTest extends ApiSupport {
         assertThat(orderInfo.get("address"), is(order.getAddress()));
         assertThat(orderInfo.get("phone"), is(order.getPhone()));
         assertThat(orderInfo.get("total_price"), is(order.getTotalPrice()));
+        assertThat(new DateTime(orderInfo.get("created_at")), is(order.getCreatedAt()));
+
+        List orderItems = (List)orderInfo.get("order_items");
+        assertThat(orderItems.size(), is(1));
     }
+
 }

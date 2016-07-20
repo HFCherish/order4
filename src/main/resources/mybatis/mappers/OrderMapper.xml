@@ -14,13 +14,8 @@
         </foreach>;
     </insert>
 
-    <insert id="saveOrderItems">
-        INSERT INTO orderItems(order_id, product_id, quantity, amount)
-        VALUES (#{info.name}, #{info.address}, #{info.phone}, #{info.user_id});
-    </insert>
-
     <select id="findById" resultMap="records.order">
-        SELECT id, user_id, name, address, phone, product_id, quantity, amount
+        SELECT id, user_id, name, address, phone, created_at, product_id, quantity, amount
         FROM orders O
         LEFT JOIN orderItems OI on O.id = OI.order_id
         WHERE O.id = #{id}

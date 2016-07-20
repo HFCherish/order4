@@ -2,7 +2,9 @@ package com.thoughtworks.ketsu.domain;
 
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
+import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ public class Order implements Record {
     private String address;
     private String phone;
     private List<OrderItem> orderItems;
+    private DateTime createdAt;
 
     public Order(long userId) {
         this.userId = userId;
@@ -44,13 +47,19 @@ public class Order implements Record {
 
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
+
+        List items = new ArrayList<>();
+        for( OrderItem item: orderItems) {
+            items.add(item.toJson(routes));
+        }
         return new HashMap<String, Object>() {{
             put("uri", routes.orderUrl(Order.this));
             put("name", getName());
             put("address", getAddress());
             put("phone", getPhone());
             put("total_price", getTotalPrice());
-
+            put("created_at", getCreatedAt());
+            put("order_items", items);
         }};
     }
 
@@ -65,5 +74,9 @@ public class Order implements Record {
             totalPrice += item.getAmount() * item.getQuantity();
         }
         return totalPrice;
+    }
+
+    public DateTime getCreatedAt() {
+        return createdAt;
     }
 }
