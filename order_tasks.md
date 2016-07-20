@@ -50,7 +50,7 @@
 27. get some order of some user
 	28. should return 200 when review some order of some user (resource.get) --15 :: 7
 	29. should the response body contain right uri info (resource.get) --15 :: 5
- 	20. should the response body contain right name, address, phone, total\_price, created\_at info (resource.get, record) --20 ::
+ 	20. should the response body contain right name, address, phone, total\_price, created\_at info (resource.get, record) --20 :: 27
  	21. should the response body contain at least one order_item info (resource.get, record) --15 ::
  	22. should the order\_item contain right product_id, quantity, amount info (resource.get, record) --10 ::
 	4. should return 404 when no order in db --5 ::

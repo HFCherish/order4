@@ -2,12 +2,15 @@ package com.thoughtworks.ketsu.domain.user;
 
 import com.thoughtworks.ketsu.domain.AssertionConcern;
 import com.thoughtworks.ketsu.domain.Order;
+import com.thoughtworks.ketsu.domain.Product;
 import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.OrderMapper;
+import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.ProductMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +19,9 @@ import static java.util.Arrays.asList;
 public class User extends AssertionConcern implements Record {
     @Inject
     OrderMapper orderMapper;
+
+    @Inject
+    ProductMapper productMapper;
 
     private long id;
     private String name;
@@ -52,6 +58,11 @@ public class User extends AssertionConcern implements Record {
 
     public Order placeOrder(Map<String, Object> orderInfo) {
         orderInfo.put("user_id", getId());
+        for(Object item: (List)orderInfo.get("order_items")) {
+            Map itemMap = (Map)item;
+            Product product = productMapper.findById(Long.valueOf(itemMap.get("product_id").toString()));
+            itemMap.put("amount", product.getPrice());
+        }
         orderMapper.save(orderInfo);
         return orderMapper.findById(Long.valueOf(orderInfo.get("id").toString()));
     }

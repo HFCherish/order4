@@ -15,6 +15,11 @@
         <result property="address" column="address"/>
         <result property="phone" column="phone"/>
         <result property="userId" column="user_id"/>
+        <collection property="orderItems" ofType="com.thoughtworks.ketsu.domain.OrderItem">
+            <result property="productId" column="product_id" />
+            <result property="quantity" column="quantity" />
+            <result property="amount" column="amount" />
+        </collection>
     </resultMap>
 
     <resultMap id="product" type="com.thoughtworks.ketsu.domain.Product">
