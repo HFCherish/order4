@@ -53,7 +53,7 @@
  	20. should the response body contain right name, address, phone, total\_price, created\_at info (resource.get, record) --20 :: 27
  	21. should the response body contain at least one order_item info (resource.get, record) --15 :: 6
  	22. should the order\_item contain right product_id, quantity, amount info (resource.get, record) --10 :: 4
-	4. should return 404 when no order in db --5 ::
+	4. should return 404 when no order in db --5 :: 1
 27. get all orders of some user
 	28. should return 200 when review all orders of some user (resource.get) --5 ::
 	29. should the response body contain at least one order info. (resource.get, record)  --10 ::
