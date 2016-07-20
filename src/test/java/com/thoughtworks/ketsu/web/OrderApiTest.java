@@ -13,9 +13,10 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
-import static com.thoughtworks.ketsu.support.TestHelper.orderJsonForTest;
-import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
-import static com.thoughtworks.ketsu.support.TestHelper.prepareUser;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -48,5 +49,44 @@ public class OrderApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toString(), containsString(ordersBaseUrl));
         assertThat(response.getLocation().toString().matches(".*/\\d+$"), is(true));
+    }
+
+    @Test
+    public void should_400_when_order_input_is_invalid() {
+        //name empty
+        Response response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("address", "beijing");
+            put("phone", "65789");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("product_id", product.getId());
+                put("quantity", 2);
+            }}));
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //address empty
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("phone", "65789");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("product_id", product.getId());
+                put("quantity", 2);
+            }}));
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //phone empty
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("address", "beijing");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("product_id", product.getId());
+                put("quantity", 2);
+            }}));
+        }});
+
+        assertThat(response.getStatus(), is(400));
     }
 }
