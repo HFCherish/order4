@@ -12,9 +12,7 @@ import javax.inject.Inject;
 
 import java.util.Optional;
 
-import static com.thoughtworks.ketsu.support.TestHelper.prepareOrder;
-import static com.thoughtworks.ketsu.support.TestHelper.prepareProduct;
-import static com.thoughtworks.ketsu.support.TestHelper.prepareUser;
+import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -30,10 +28,10 @@ public class PaymentOperationTest {
     public void should_pay_and_get_payment() {
         Order order = prepareOrder(prepareUser(userRepository), prepareProduct(productRepository));
 
-        Payment payment = order.pay();
+        Payment payment = order.pay(paymentJsonForTest());
         Optional<Payment> fetched = order.getPayment();
 
         assertThat(fetched.isPresent(), is(true));
-
+        assertThat(fetched.get().getOrderId(), is(order.getId()));
     }
 }

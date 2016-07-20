@@ -1,12 +1,18 @@
 package com.thoughtworks.ketsu.domain;
 
+import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.joda.time.DateTime;
 
+import javax.inject.Inject;
 import java.util.*;
 
 public class Order implements Record {
+
+    @Inject
+    OrderMapper orderMapper;
+
     private long id;
     private long userId;
     private String name;
@@ -81,11 +87,12 @@ public class Order implements Record {
         return createdAt;
     }
 
-    public Payment pay() {
-        return null;
+    public Payment pay(Map<String, Object> paymentInfo) {
+        orderMapper.pay(paymentInfo, getId());
+        return orderMapper.findPay(getId());
     }
 
     public Optional<Payment> getPayment() {
-        return Optional.ofNullable(new Payment());
+        return Optional.ofNullable(orderMapper.findPay(getId()));
     }
 }
