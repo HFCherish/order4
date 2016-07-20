@@ -2,9 +2,11 @@ package com.thoughtworks.ketsu.domain.user;
 
 import com.thoughtworks.ketsu.domain.AssertionConcern;
 import com.thoughtworks.ketsu.domain.Order;
+import com.thoughtworks.ketsu.infrastructure.mybatis.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +14,9 @@ import java.util.Optional;
 import static java.util.Arrays.asList;
 
 public class User extends AssertionConcern implements Record {
+    @Inject
+    OrderMapper orderMapper;
+
     private long id;
     private String name;
 
@@ -46,11 +51,12 @@ public class User extends AssertionConcern implements Record {
     }
 
     public Order placeOrder(Map<String, Object> orderInfo) {
-
-        return null;
+        orderInfo.put("user_id", getId());
+        orderMapper.save(orderInfo);
+        return orderMapper.findById(Long.valueOf(orderInfo.get("id").toString()));
     }
 
     public Optional<Order> findOrderById(Long id) {
-        return Optional.ofNullable(new Order(6789l));
+        return Optional.ofNullable(orderMapper.findById(id));
     }
 }

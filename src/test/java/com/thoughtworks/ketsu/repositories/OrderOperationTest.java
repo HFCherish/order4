@@ -44,9 +44,10 @@ public class OrderOperationTest {
         Map<String, Object> orderInfo = orderJsonForTest(product.getId());
 
         Order order = user.placeOrder(orderInfo);
-        Optional<Order> fetched = user.findOrderById(6788l);
+        Optional<Order> fetched = user.findOrderById(Long.valueOf(orderInfo.get("id").toString()));
 
         assertThat(fetched.isPresent(), is(true));
+        assertThat(fetched.get().getId(), is(order.getId()));
 
     }
 }

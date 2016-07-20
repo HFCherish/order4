@@ -40,9 +40,9 @@
 	19. should include the creation uri in header location (resource.post) --2 :: 5
 	3. --------------------------------------------------
 	20. should have tried to save the order info into database and should able to get the order after created order (repo.findById) --15 :: 7
-	22. should the order's id is the same as the created one (resourc.post, repo.save, mapper, database, record; repo.findById, mapper) --13 ::
+	22. should the order's id is the same as the created one (resourc.post, repo.save, mapper, database, record; repo.findById, mapper) --13 :: 21
 	3. --------------------------------------------------
-	4. should the creation uri contains order id in header location -- 5 ::
+	4. should the creation uri contains order id in header location -- 5 :: 10
 	4. should return 400 when the order contains 0 order item --10 ::
 	5. should return 400 when the order item doesn't exists --5 ::
 27. get some order of some user
