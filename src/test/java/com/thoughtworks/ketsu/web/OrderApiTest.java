@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -84,6 +85,49 @@ public class OrderApiTest extends ApiSupport {
             put("order_items", Arrays.asList(new HashMap(){{
                 put("product_id", product.getId());
                 put("quantity", 2);
+            }}));
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //order items empty
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("phone", "65789");
+            put("address", "beijing");
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //order items 0 item
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("phone", "65789");
+            put("address", "beijing");
+            put("order_items", new ArrayList<>());
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //order items product_id empty
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("phone", "65789");
+            put("address", "beijing");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("quantity", 2);
+            }}));
+        }});
+
+        assertThat(response.getStatus(), is(400));
+
+        //order items quantity empty
+        response = post(ordersBaseUrl, new HashMap<String, Object>() {{
+            put("name", USER_NAME);
+            put("phone", "65789");
+            put("address", "beijing");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("product_id", product.getId());
             }}));
         }});
 
