@@ -70,7 +70,7 @@
 	31. should try to save the payment info into database and should able to get that payment after pay (resourc.post, repo.findByOrderId) --20 :: 5
 	32. should the id of that payment is as expected (resourc.post, repo.save, mapper, database, record; repo.findByOrderId, mapper) --20 :: 15
 34. get payment of some order
-	32. should return 200 when get payment (resourc.get) --10 ::
+	32. should return 200 when get payment (resourc.get) --10 :: 4
 	33. should the response body include right pay type info -- 12 ::
 	35. should the response body include right amount, order_uri & payment uri (resource.get) --15 ::
 	34. should the response body include right creating date (resoure.get, mapper-findByOrderId, record) --5 ::
