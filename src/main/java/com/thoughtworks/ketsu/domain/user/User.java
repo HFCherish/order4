@@ -1,11 +1,13 @@
 package com.thoughtworks.ketsu.domain.user;
 
 import com.thoughtworks.ketsu.domain.AssertionConcern;
+import com.thoughtworks.ketsu.domain.Order;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
@@ -43,4 +45,12 @@ public class User extends AssertionConcern implements Record {
         return toRefJson(routes);
     }
 
+    public Order placeOrder(Map<String, Object> orderInfo) {
+
+        return null;
+    }
+
+    public Optional<Order> findOrderById(Long id) {
+        return Optional.ofNullable(new Order(6789l));
+    }
 }
