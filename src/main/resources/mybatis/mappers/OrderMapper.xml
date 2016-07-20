@@ -15,10 +15,19 @@
     </insert>
 
     <select id="findById" resultMap="records.order">
-        SELECT id, user_id, name, address, phone, created_at, product_id, quantity, amount
+        SELECT
+        <include refid="columns.order" />
         FROM orders O
         LEFT JOIN orderItems OI on O.id = OI.order_id
         WHERE O.id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="records.order">
+        SELECT
+        <include refid="columns.order" />
+        FROM orders O
+        LEFT JOIN orderItems OI on O.id = OI.order_id
+        WHERE O.user_id = #{userId}
     </select>
 
 </mapper>

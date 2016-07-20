@@ -70,4 +70,8 @@ public class User extends AssertionConcern implements Record {
     public Optional<Order> findOrderById(Long id) {
         return Optional.ofNullable(orderMapper.findById(id));
     }
+
+    public List<Order> findAll() {
+        return orderMapper.findAll(getId());
+    }
 }

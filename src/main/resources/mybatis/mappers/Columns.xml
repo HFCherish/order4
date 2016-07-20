@@ -10,4 +10,17 @@
         U.password as userPassword,
         U.role as userRole
     </sql>
+
+    <sql id="order">
+        id,
+        user_id,
+        name,
+        address,
+        phone,
+        created_at,
+        product_id,
+        quantity,
+        amount
+  </sql>
+
 </mapper>
