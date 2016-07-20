@@ -8,6 +8,7 @@ import com.thoughtworks.ketsu.domain.user.UserRepository;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +41,7 @@ public class PaymentApiTest extends ApiSupport {
         user = prepareUser(userRepository);
         product = prepareProduct(productRepository);
         order = prepareOrder(user, product);
-        paymentBaseUrl = "/users/" + user.getId() + "/orders/" + order.getId() + "/payment";
+        paymentBaseUrl = "users/" + user.getId() + "/orders/" + order.getId() + "/payment";
     }
 
     @Test
@@ -60,6 +61,16 @@ public class PaymentApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(200));
         Map paymentInfo = response.readEntity(Map.class);
         assertThat(paymentInfo.get("pay_type"), is(payment.getType().name()));
+        assertThat((double)paymentInfo.get("amount"), is(payment.getAmount()));
+        assertThat(new DateTime(paymentInfo.get("created_at")), is(payment.getCreatedAt()));
+        assertThat(paymentInfo.get("order_uri"), is("users/" + user.getId() + "/orders/" + order.getId()));
+        assertThat(paymentInfo.get("uri"), is(paymentBaseUrl));
+
+    }
+
+    @Test
+    public void should_404_when_get_payment_given_not_pay() {
+
 
     }
 }

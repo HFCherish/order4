@@ -1,13 +1,8 @@
 package com.thoughtworks.ketsu.domain;
 
-import com.thoughtworks.ketsu.infrastructure.records.Record;
-import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.joda.time.DateTime;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Payment implements Record{
+public class Payment{
     private long orderId;
     private double amount;
     private PayType type;
@@ -29,15 +24,5 @@ public class Payment implements Record{
         return type;
     }
 
-    @Override
-    public Map<String, Object> toRefJson(Routes routes) {
-        return new HashMap<String, Object>(){{
-            put("pay_type", getType());
-        }};
-    }
 
-    @Override
-    public Map<String, Object> toJson(Routes routes) {
-        return toRefJson(routes);
-    }
 }
