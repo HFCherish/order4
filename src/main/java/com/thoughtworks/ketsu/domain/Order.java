@@ -45,6 +45,10 @@ public class Order implements Record {
         return userId;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
 

@@ -1,6 +1,7 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.Order;
+import com.thoughtworks.ketsu.domain.OrderItem;
 import com.thoughtworks.ketsu.domain.Product;
 import com.thoughtworks.ketsu.domain.user.User;
 import com.thoughtworks.ketsu.domain.user.UserRepository;
@@ -8,6 +9,7 @@ import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -152,6 +154,11 @@ public class OrdersApiTest extends ApiSupport {
 
         List orderItems = (List)orderInfo.get("order_items");
         assertThat(orderItems.size(), is(1));
+        Map fetchedItem = (Map)orderItems.get(0);
+        OrderItem item = order.getOrderItems().get(0);
+        assertThat(Long.valueOf(fetchedItem.get("product_id").toString()), is(item.getProductId()));
+        assertThat(fetchedItem.get("quantity"), is(item.getQuantity()));
+        assertThat((double)fetchedItem.get("amount"), is(item.getAmount()));
     }
 
 }
