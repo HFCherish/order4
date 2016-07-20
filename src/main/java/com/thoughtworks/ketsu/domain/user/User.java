@@ -58,11 +58,6 @@ public class User extends AssertionConcern implements Record {
 
     public Order placeOrder(Map<String, Object> orderInfo) {
         orderInfo.put("user_id", getId());
-        for(Object item: (List)orderInfo.get("order_items")) {
-            Map itemMap = (Map)item;
-            Product product = productMapper.findById(Long.valueOf(itemMap.get("product_id").toString()));
-            itemMap.put("amount", product.getPrice());
-        }
         orderMapper.save(orderInfo);
         return orderMapper.findById(Long.valueOf(orderInfo.get("id").toString()));
     }

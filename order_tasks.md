@@ -1,4 +1,4 @@
-#tasks
+#tasks (23.7h :: 14.55)
 2. product creation
 	2. should return 201 when create a product  (resource.post)  --10 :: 8
 	3. should contain creation uri in header location (resource.post) --10 :: 3

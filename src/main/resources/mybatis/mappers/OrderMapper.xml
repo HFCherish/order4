@@ -8,9 +8,14 @@
         SET @LAST_INSERT_ORDER_ID = LAST_INSERT_ID();
 
         INSERT INTO orderItems(order_id, product_id, quantity, amount)
-        VALUES
         <foreach collection="info.order_items" item="item" open="(" separator="," close=")">
-            @LAST_INSERT_ORDER_ID, #{item.product_id}, #{item.quantity}, #{item.amount}
+            SELECT
+            @LAST_INSERT_ORDER_ID,
+            #{item.product_id},
+            #{item.quantity},
+            price
+            FROM products
+            WHERE id = #{item.product_id}
         </foreach>;
     </insert>
 
