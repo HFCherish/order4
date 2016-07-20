@@ -181,6 +181,9 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(200));
         List orders = response.readEntity(List.class);
         assertThat(orders.size(), is(1));
-
+        Map fetchedOrder = (Map)orders.get(0);
+        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
+        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
+        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
     }
 }
