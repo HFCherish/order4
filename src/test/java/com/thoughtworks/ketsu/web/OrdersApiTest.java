@@ -145,12 +145,7 @@ public class OrdersApiTest extends ApiSupport {
 
         assertThat(response.getStatus(), is(200));
         Map orderInfo = response.readEntity(Map.class);
-        assertThat(orderInfo.get("uri").toString(), containsString(getOneUrl));
-        assertThat(orderInfo.get("name"), is(order.getName()));
-        assertThat(orderInfo.get("address"), is(order.getAddress()));
-        assertThat(orderInfo.get("phone"), is(order.getPhone()));
-        assertThat(orderInfo.get("total_price"), is(order.getTotalPrice()));
-        assertThat(new DateTime(orderInfo.get("created_at")), is(order.getCreatedAt()));
+        verifyOrderBasicInfo(order, orderInfo);
 
         List orderItems = (List)orderInfo.get("order_items");
         assertThat(orderItems.size(), is(1));
@@ -159,6 +154,15 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(Long.valueOf(fetchedItem.get("product_id").toString()), is(item.getProductId()));
         assertThat(fetchedItem.get("quantity"), is(item.getQuantity()));
         assertThat((double)fetchedItem.get("amount"), is(item.getAmount()));
+    }
+
+    private void verifyOrderBasicInfo(Order order, Map orderInfo) {
+        assertThat(orderInfo.get("uri").toString(), containsString(ordersBaseUrl + "/" + order.getId()));
+        assertThat(orderInfo.get("name"), is(order.getName()));
+        assertThat(orderInfo.get("address"), is(order.getAddress()));
+        assertThat(orderInfo.get("phone"), is(order.getPhone()));
+        assertThat(orderInfo.get("total_price"), is(order.getTotalPrice()));
+        assertThat(new DateTime(orderInfo.get("created_at")), is(order.getCreatedAt()));
     }
 
     @Test
@@ -181,9 +185,6 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(200));
         List orders = response.readEntity(List.class);
         assertThat(orders.size(), is(1));
-        Map fetchedOrder = (Map)orders.get(0);
-        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
-        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
-        assertThat(fetchedOrder.get("uri"), is(ordersBaseUrl + "/" + order.getId()));
+        verifyOrderBasicInfo(order, (Map)orders.get(0));
     }
 }
