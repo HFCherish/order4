@@ -26,6 +26,13 @@ public class TestHelper {
         return userRepository.save(userJsonForTest(USER_NAME));
     }
 
+    public static Map<String, Object> paymentJsonForTest() {
+        return new HashMap<String, Object>() {{
+            put("type", "CASH");
+            put("amount", 13546);
+        }};
+    }
+
     public static Map<String, Object> orderJsonForTest(long productId) {
         return new HashMap<String, Object>() {{
             put("name", USER_NAME);
