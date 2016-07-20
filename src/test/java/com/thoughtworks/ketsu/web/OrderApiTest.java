@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.web;
 
+import com.thoughtworks.ketsu.domain.Order;
 import com.thoughtworks.ketsu.domain.Product;
 import com.thoughtworks.ketsu.domain.user.User;
 import com.thoughtworks.ketsu.domain.user.UserRepository;
@@ -132,5 +133,16 @@ public class OrderApiTest extends ApiSupport {
         }});
 
         assertThat(response.getStatus(), is(400));
+    }
+
+    @Test
+    public void should_get_order_successfully() {
+        Order order = prepareOrder(user, product);
+        String getOneUrl = ordersBaseUrl + "/" + order.getId();
+
+        Response response = get(getOneUrl);
+
+        assertThat(response.getStatus(), is(200));
+
     }
 }
