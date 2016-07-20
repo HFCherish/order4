@@ -1,7 +1,6 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.Order;
-import com.thoughtworks.ketsu.domain.Payment;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -9,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.Map;
 
 public class PaymentApi {
     private Order order;
@@ -19,8 +19,10 @@ public class PaymentApi {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response pay() {
-        return Response.created(URI.create("")).build();
+    public Response pay(Map paymentInfo,
+                        @Context UriInfo uriInfo) {
+        order.pay(paymentInfo);
+        return Response.created(uriInfo.getRequestUri()).build();
     }
 
     @GET

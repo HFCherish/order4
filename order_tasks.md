@@ -74,7 +74,7 @@
 	33. should the response body include right pay type info -- 12 :: 16
 	35. should the response body include right amount, order_uri & payment uri (resource.get) --15 ::
 	34. should the response body include right creating date (resoure.get, mapper-findByOrderId, record) --5 :: 28
-	4. should return 404 when no payment in db --5 ::
+	4. should return 404 when no payment in db --5 :: 2
 
 #databases
 1. product: 

@@ -70,7 +70,9 @@ public class PaymentApiTest extends ApiSupport {
 
     @Test
     public void should_404_when_get_payment_given_not_pay() {
+        Response response = get(paymentBaseUrl);
 
+        assertThat(response.getStatus(), is(404));
 
     }
 }
