@@ -1,6 +1,5 @@
 package com.thoughtworks.ketsu.web;
 
-import com.thoughtworks.ketsu.domain.Order;
 import com.thoughtworks.ketsu.domain.user.User;
 import com.thoughtworks.ketsu.infrastructure.validators.OrderValidator;
 import com.thoughtworks.ketsu.web.jersey.Routes;
@@ -27,7 +26,9 @@ public class OrdersApi {
     }
 
     @Path("{id}")
-    public OrderApi getOne() {
-        return new OrderApi(new Order(89l));
+    public OrderApi getOne(@PathParam("id") long id) {
+        return user.findOrderById(id)
+                .map(OrderApi::new)
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 }

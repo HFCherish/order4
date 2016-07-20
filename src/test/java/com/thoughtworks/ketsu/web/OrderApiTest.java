@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -143,6 +144,7 @@ public class OrderApiTest extends ApiSupport {
         Response response = get(getOneUrl);
 
         assertThat(response.getStatus(), is(200));
-
+        Map orderInfo = response.readEntity(Map.class);
+        assertThat(orderInfo.get("uri").toString(), containsString(getOneUrl));
     }
 }

@@ -1,6 +1,13 @@
 package com.thoughtworks.ketsu.domain;
 
-public class Order {
+import com.thoughtworks.ketsu.infrastructure.records.Record;
+import com.thoughtworks.ketsu.web.jersey.Routes;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
+
+public class Order implements Record{
     private long id;
     private long userId;
     private String name;
@@ -32,5 +39,17 @@ public class Order {
 
     public long getUserId() {
         return userId;
+    }
+
+    @Override
+    public Map<String, Object> toRefJson(Routes routes) {
+        return new HashMap<String, Object>() {{
+            put("uri", routes.orderUrl(Order.this));
+        }};
+    }
+
+    @Override
+    public Map<String, Object> toJson(Routes routes) {
+        return toRefJson(routes);
     }
 }
